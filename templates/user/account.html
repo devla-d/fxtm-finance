@@ -1,0 +1,133 @@
+ {% extends "layouts/user-layout.html" %} {% load static %}{% block title %} My Account {% endblock title %} {% block stylesheet %}
+
+
+
+<style>
+    label {
+        color: #fff;
+    }
+    
+    th {
+        color: #fff;
+    }
+    
+    .account-detail-body li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #222
+    }
+    
+    .account-detail-body li h5 {
+        color: #fff;
+    }
+    
+    .user__avatar {
+        border-radius: 50%;
+        width: 20%;
+    }
+    
+    .balances {
+        padding: 16px;
+    }
+    
+    .balances .bal-item {}
+    
+    .balances .bal-item h3 {
+        font-size: 15px;
+    }
+    
+    .balances .bal-item p {
+        color: #fff;
+        font-size: 30px;
+    }
+    
+    ul {
+        padding: 0 !important;
+    }
+</style>
+
+{% endblock stylesheet %} {% block content %}
+
+
+
+<div class="  align-items-center    mb-4">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Account</li>
+    </ol>
+</div>
+
+
+<div class="row mb-4">
+    <div class="col-xl-12">
+        <div class="row d-flex justify-content-center">
+            <img src="{{ user.profile_image.url }}" name="aboutme" width="140" height="140" style="border-radius: 50%;" border="0" class="img-circle">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="row">
+            <div class="col-xl-6">
+                <ul class=" account-detail-body mt-2">
+                    <li>
+                        <h5 class="mr-4">Address</h5>
+                        <span class="text-muted">{{ user.address }}</span>
+                    </li>
+                    <li class="mb-1">
+                        <h5 class="mr-4">Postal code</h5>
+                        <span>{{ user.zipcode }}</span>
+                    </li>
+                    <li class="mb-1">
+                        <h5 class="mr-4">State</h5>
+                        <span>{{ user.state }}</span>
+                    </li>
+                    <li class="mb-1">
+                        <h5 class="mr-4">Gender</h5>
+                        <span>{{ user.gender }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-6">
+                <div class="balances  mt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="bal-item">
+                                <h3>Total Balance</h3>
+                                <p>${{user.balance}}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bal-item ml-4">
+                                <h3>Deposit Balance</h3>
+                                <p>${{user.deposite_balance}}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bal-item">
+                                <h3>Total withdraw</h3>
+                                <p>${{user.withdraw_total}}</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bal-item ml-4">
+                                <h3>Total Amout Invested</h3>
+                                <p>${{user.total_amount_invested}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <a href="/settings" class="btn btn-primary btn-block mb-4"><i class="fas fa-cog  fa-spin"></i> Settings</a>
+    </div>
+</div>
+
+
+{% endblock content %} {% block scripts %} {% endblock scripts %}

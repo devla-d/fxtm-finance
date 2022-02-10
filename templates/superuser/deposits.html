@@ -1,0 +1,47 @@
+{% extends "layouts/staff-layout.html" %} {% load crispy_forms_tags %} {% block stylesheet %} {% endblock stylesheet %} {% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">Deposit</h3>
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">User</th>
+                            <th class="border-top-0">Amount</th>
+                            <th class="border-top-0">Date</th>
+                            <th class="border-top-0">Status</th>
+                            <th class="border-top-0">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in deposits %}
+                        <tr>
+                            <td>{{obj.user.username}}</td>
+                            <td>${{obj.amount}}</td>
+                            <td>{{obj.date|date:'M d '}}</td>
+                            {% if obj.status == "pending" %}
+                            <td class="text-warning"> {{ obj.status }} </td>
+                            {% elif obj.status == "approved" %}
+                            <td class="text-success"> {{ obj.status }} </td>
+                            {% else %}
+                            <td class="text-danger"> {{ obj.status }} </td>
+                            {% endif %}
+                            <td><a href="/staff/payment/{{obj.id}}/" class="btn-primary btn-sm">view</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %} {% block script %} {% endblock script %}

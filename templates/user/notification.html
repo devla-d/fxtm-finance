@@ -1,0 +1,61 @@
+{% extends "layouts/user-layout.html" %} {% load static %}{% block title %}Notifications{% endblock title %} {% block stylesheet %}
+
+<style>
+    label {
+        color: #fff;
+    }
+    
+    th {
+        color: #fff;
+    }
+    
+    .toggler {
+        background: transparent;
+        border: none;
+    }
+    
+    .toggler i {
+        color: #fd961a;
+    }
+</style>
+{% endblock stylesheet %} {% block content %}
+
+<div class="  align-items-center    mb-4">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+    </ol>
+</div>
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="row d-flex justify-content-center">
+            {% for notify in user_notify %}
+            <div class="col-xl-10 p-3 d-flex align-items-center   osahan-post-header mt-3" style="background-color: #000;">
+                <div class="dropdown-list-image mr-3 d-flex align-items-center   justify-content-center rounded-circle text-prim"><i class="fas fa-bell"></i></div>
+                <div class="font-weight-bold mr-3">
+                    <div class="text-truncate text-white">{{ notify.title }}</div>
+                    <div class="small">{{ notify.body }}</div>
+                </div>
+                <span class="ml-auto mb-auto">
+                                        <!--<div class="btn-group">
+                                            <button type="button" class="toggler" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-exclamation"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" style="">
+                                                <button class="dropdown-item" type="button"><i class="mdi mdi-delete"></i> Delete</button>
+                                                <button class="dropdown-item" type="button"><i class="mdi mdi-close"></i> Turn Off</button>
+                                            </div>
+                                        </div>-->
+                                        <br />
+                                        <div class="text-right text-muted pt-1">{{ notify.date|date:'M d ' }}</div>
+                                    </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %} {% block scripts %} {% endblock scripts %}

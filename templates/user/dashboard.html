@@ -1,0 +1,260 @@
+{% extends "layouts/user-layout.html" %} {% load static %}{% block title %} Dashboard{% endblock title %} {% block stylesheet %} {% endblock stylesheet %} {% block content %}
+
+<div class="align-items-center   mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+    </ol>
+</div>
+
+
+{% if investment.status == 'inactive' %}
+
+
+
+
+
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8 mt-5">
+        <div class="card   mt-5 " style="padding: 20px;">
+            <div class="text-center">
+                <h5 class="text-white">Your Don't Have Any Current Invvestment</h5>
+                <a href="/create-investment" class="btn btn-primary"><i class="la la-exchange"></i> Invest</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% else %}
+<div class="row mb-2">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1"> Total Earnings</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2">${{user.balance}}</div>
+                        <!--<div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                            <span>Since last month</span>
+                        </div>-->
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-coins fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Earnings (Annual) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Amount Invested</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2">${{user.total_amount_invested}}</div>
+                        <!--<div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                            <span>Since last years</span>
+                        </div>-->
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-donate fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Us er Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Start Date</div>
+                        <div class="h5 mb-0 mt-3 mr-3 font-weight-bold text-gray-800">{{investment.start_date|date:'M d '}}</div>
+
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        {% if investment.status == "active" %}
+                        <div id="enddate" data-date="{{ investment.end_date|date:'M d, Y H:m:s' }}" class="text-xs font-weight-bold text-uppercase mb-1">End Date</div>
+                        {% else %}
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">End Date</div>
+                        {% endif %}
+                        <div class="h5 mb-0  font-weight-bold text-gray-800">{{investment.end_date|date:'M d '}}</div>
+                        <div class="mt-2 mb-0 text-muted text-xs">
+                            <span class="text-prim" id="endatetime"></span>
+                        </div>
+                    </div>
+                    <div class="col-auto ">
+                        <i class="las la-hourglass-half fa-2x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+<div class="row ">
+    <div class="col-xl-3">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Package</div>
+                        <div class="h5 mb-0 mt-3 mr-3 font-weight-bold text-gray-800">{{investment.package.name}}</div>
+
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-gift fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card mt-5 mb-3">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Status</div>
+                        <div class="h5 mb-0 mt-3 mr-3 font-weight-bold text-success">
+                            {{investment.status}}
+                        </div>
+
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class=" col-xl-9">
+
+        <div class="tradingview-widget-container mainCard mb-2">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                    "symbol": "BITSTAMP:BTCUSD",
+                    "width": "100%",
+                    "height": 400,
+                    "locale": "en",
+                    "dateRange": "12M",
+                    "colorTheme": "light",
+                    "trendLineColor": "rgba(41, 98, 255, 1)",
+                    "underLineColor": "rgba(41, 98, 255, 0.3)",
+                    "underLineBottomColor": "rgba(41, 98, 255, 0)",
+                    "isTransparent": true,
+                    "autosize": false,
+                    "largeChartUrl": ""
+                }
+            </script>
+        </div>
+
+
+
+    </div>
+</div>
+
+{% endif %} {% endblock content %} {% block scripts %}
+<script>
+    $(function() {
+        /* csrf token */
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+
+
+        const timer = $('#enddate').data('date');
+        console.log(timer)
+        const user_id = "{{user.id}}"
+        if (timer) {
+            const eventDate = Date.parse(timer);
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = eventDate - now;
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+
+                $('#endatetime').text(`${days}d ${hours} h ${minutes} m ${seconds} s`)
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    $('#endatetime').text(`0d 0 h 0 m 0 s`)
+                    credit_user(user_id)
+
+
+                }
+
+            }, 1000)
+        }
+
+        function credit_user(user) {
+            $.ajax({
+                type: "POST",
+                url: "/credit-user-investment/",
+                data: {
+                    user_pk: user,
+                    csrfmiddlewaretoken: csrftoken,
+                },
+
+                success: function(data) {
+                    window.location.reload();
+
+                },
+
+            });
+        }
+    });
+</script>
+
+
+{% endblock scripts %}

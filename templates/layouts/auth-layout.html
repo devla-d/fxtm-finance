@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %} - TradeFx</title>
+    <link rel="stylesheet" href="{% static '/vendors/animate.css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/cryptocoins/css/cryptocoins.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/cryptocoins/css/cryptocoins-colors.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/nprogress/nprogress.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/select2/dist/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/jquery-ui-1.10.0.custom.css' %}">
+    <link rel="stylesheet" href="{% static '/css/jquery.fancybox.css' %}">
+    <link rel="stylesheet" href="{% static '/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/orange.css' %}">
+    <link rel="stylesheet" href="{% static '/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static '/vendors/intl-tel-input-17.0.0/intl-tel-input-17.0.0/build/css/intlTelInput.css' %}">
+    <link rel="stylesheet" href="{% static '/css/toastr.min.css' %}">
+    <script src="{% static '/js/modernizr.js' %}"></script>
+    {% block style %} {% endblock style %}
+    <style>
+        body {
+            top: 0 !important;
+        }
+        
+        body>div:nth-child(1) {
+            display: none;
+        }
+        
+        body>div>div>div.lang-chage>div>span {
+            width: 100% !important;
+        }
+        
+        label {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %} {% for msg in messages %}
+    <div class="messages" data-msg="{{ msg }}"></div>
+    {% endfor %} {% endif %}
+
+    <!-- SVG Preloader Starts -->
+    <div id="preloader">
+        <div id="preloader-content">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="100 100 400 400" xml:space="preserve">
+                    <filter id="dropshadow" height="130%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+                    <feOffset dx="0" dy="0" result="offsetblur"/>
+                    <feFlood flood-color="red"/>
+                    <feComposite in2="offsetblur" operator="in"/>
+                    <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                    </filter>          
+                    <path class="path" fill="#000000" d="M446.089,261.45c6.135-41.001-25.084-63.033-67.769-77.735l13.844-55.532l-33.801-8.424l-13.48,54.068
+                        c-8.896-2.217-18.015-4.304-27.091-6.371l13.568-54.429l-33.776-8.424l-13.861,55.521c-7.354-1.676-14.575-3.328-21.587-5.073
+                        l0.034-0.171l-46.617-11.64l-8.993,36.102c0,0,25.08,5.746,24.549,6.105c13.689,3.42,16.159,12.478,15.75,19.658L208.93,357.23
+                        c-1.675,4.158-5.925,10.401-15.494,8.031c0.338,0.485-24.579-6.134-24.579-6.134l-9.631,40.468l36.843,9.188
+                        c8.178,2.051,16.209,4.19,24.098,6.217l-13.978,56.17l33.764,8.424l13.852-55.571c9.235,2.499,18.186,4.813,26.948,6.995
+                        l-13.802,55.309l33.801,8.424l13.994-56.061c57.648,10.902,100.998,6.502,119.237-45.627c14.705-41.979-0.731-66.193-31.06-81.984
+                        C425.008,305.984,441.655,291.455,446.089,261.45z M368.859,369.754c-10.455,41.983-81.128,19.285-104.052,13.589l18.562-74.404
+                        C306.28,314.65,379.774,325.975,368.859,369.754z M379.302,260.846c-9.527,38.187-68.358,18.781-87.442,14.023l16.828-67.489
+                        C327.767,212.14,389.234,221.02,379.302,260.846z"/>       
+                </svg>
+        </div>
+    </div>
+    <!-- SVG Preloader Ends -->
+
+    <!--setting-tab -->
+    <div class="setting-tab">
+        <div>
+            <div class="lang-chage">
+                <div class="form-group">
+                    <label for="language">Choose your language</label>
+                    <select class="no-select py-1 text-white-50 form-control" id="language" onchange="changeLanguageByButtonClick()">
+                            <option value="af">Afrikanns</option>
+                            <option value="sq">Albanian</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hy">Armenian</option>
+                            <option value="eu">Basque</option>
+                            <option value="bn">Bengali</option>
+                            <option value="bg">Bulgarian</option>
+                            <option value="ca">Catalan</option>
+                            <option value="km">Cambodian</option>
+                            <option value="zh-CN">Chinese (Mandarin)</option>
+                            <option value="hr">Croation</option>
+                            <option value="cs">Czech</option>
+                            <option value="da">Danish</option>
+                            <option value="nl">Dutch</option>
+                            <option value="en" selected="">English</option>
+                            <option value="et">Estonian</option>
+                            <option value="fj">Fiji</option>
+                            <option value="fi">Finnish</option>
+                            <option value="fr">French</option>
+                            <option value="ka">Georgian</option>
+                            <option value="de">German</option>
+                            <option value="el">Greek</option>
+                            <option value="gu">Gujarati</option>
+                            <option value="he">Hebrew</option>
+                            <option value="hi">Hindi</option>
+                            <option value="hu">Hungarian</option>
+                            <option value="is">Icelandic</option>
+                            <option value="id">Indonesian</option>
+                            <option value="ga">Irish</option>
+                            <option value="it">Italian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="jw">Javanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="la">Latin</option>
+                            <option value="lv">Latvian</option>
+                            <option value="lt">Lithuanian</option>
+                            <option value="mk">Macedonian</option>
+                            <option value="ms">Malay</option>
+                            <option value="ml">Malayalam</option>
+                            <option value="mt">Maltese</option>
+                            <option value="mi">Maori</option>
+                            <option value="mr">Marathi</option>
+                            <option value="mn">Mongolian</option>
+                            <option value="ne">Nepali</option>
+                            <option value="no">Norwegian</option>
+                            <option value="fa">Persian</option>
+                            <option value="pl">Polish</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="pa">Punjabi</option>
+                            <option value="qu">Quechua</option>
+                            <option value="ro">Romanian</option>
+                            <option value="ru">Russian</option>
+                            <option value="sm">Samoan</option>
+                            <option value="sr">Serbian</option>
+                            <option value="sk">Slovak</option>
+                            <option value="sl">Slovenian</option>
+                            <option value="es">Spanish</option>
+                            <option value="sw">Swahili</option>
+                            <option value="sv">Swedish </option>
+                            <option value="ta">Tamil</option>
+                            <option value="tt">Tatar</option>
+                            <option value="te">Telugu</option>
+                            <option value="th">Thai</option>
+                            <option value="bo">Tibetan</option>
+                            <option value="to">Tonga</option>
+                            <option value="tr">Turkish</option>
+                            <option value="uk">Ukranian</option>
+                            <option value="ur">Urdu</option>
+                            <option value="uz">Uzbek</option>
+                            <option value="vi">Vietnamese</option>
+                            <option value="cy">Welsh</option>
+                            <option value="xh">Xhosa</option>
+                        </select>
+                </div>
+            </div>
+            <div class="sticon">
+                <div>
+                    <i class="fas fa-cog fa-spin setting-tab-toggler"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--setting-tab -->
+
+
+
+
+    <main id="main">
+        {% block content %} {% endblock content %}
+    </main>
+
+
+
+    <script src="{% static '/vendors/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static '/js/superfish.js' %}"></script>
+    <script src="{% static '/js/jquery.superslides.js' %}"></script>
+    <script src="{% static '/js/jquery-ui.js' %}"></script>
+    <script src="{% static '/js/jquery.appear.js' %}"></script>
+    <script src="{% static '/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static '/js/jquery.fancybox.js' %}"></script>
+    <script src="{% static '/js/jquery.sticky.js' %}"></script>
+    <script src="{% static '/js/slick.js' %}"></script>
+    <script src="{% static '/vendors/bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static '/vendors/nprogress/nprogress.js' %}"></script>
+    <script src="{% static '/vendors/select2/dist/js/select2.min.js' %}"></script>
+    <script src="{% static '/vendors/intl-tel-input-17.0.0/intl-tel-input-17.0.0/build/js/intlTelInput.js' %}"></script>
+    <script src="{% static '/js/toastr.min.js' %}"></script>
+    {% if messages %}
+    <script src="{% static '/js/toastr-init.js' %}"></script>
+    {% endif %}
+    <script src="{% static '/js/circle-progress.min.js' %}"></script>
+    <script src="{% static '/js/circle-progress-init.js' %}"></script>
+    <script src="{% static '/js/scripts.js' %}"></script>
+    <div id="google_translate_element" style="display:none"></div>
+    <script type="text/javascript">
+        function readCookie(name) {
+            var c = document.cookie.split('; '),
+                cookies = {},
+                i, C;
+
+            for (i = c.length - 1; i >= 0; i--) {
+                C = c[i].split('=');
+                cookies[C[0]] = C[1];
+            }
+
+            return cookies[name];
+        }
+        var lang = readCookie('googtrans').slice(-2);
+        $('#language option[value="' + lang + '"]').prop('selected', true);
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: "en"
+            }, 'google_translate_element');
+        }
+
+        function changeLanguageByButtonClick() {
+            var language = document.getElementById("language").value;
+            var selectField = document.querySelector("#google_translate_element select");
+            for (var i = 0; i < selectField.children.length; i++) {
+                var option = selectField.children[i];
+                // find desired langauge and change the former language of the hidden selection-field 
+                if (option.value == language) {
+                    selectField.selectedIndex = i;
+                    // trigger change event afterwards to make google-lib translate this side
+                    selectField.dispatchEvent(new Event('change'));
+                    break;
+                }
+            }
+        }
+
+        function changeLanguageByButtonClick2() {
+            var language = document.getElementById("language2").value;
+            var selectField = document.querySelector("#google_translate_element select");
+            for (var i = 0; i < selectField.children.length; i++) {
+                var option = selectField.children[i];
+                // find desired langauge and change the former language of the hidden selection-field 
+                if (option.value == language) {
+                    selectField.selectedIndex = i;
+                    // trigger change event afterwards to make google-lib translate this side
+                    selectField.dispatchEvent(new Event('change'));
+                    break;
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="/static/js/element.js?cb=googleTranslateElementInit"></script>
+    {% block javascripts %} {% endblock javascripts %}
+</body>
+
+</html>

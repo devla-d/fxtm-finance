@@ -1,0 +1,68 @@
+{% extends "layouts/user-layout.html" %} {% load static %}{% block title %} Withdraw Funds {% endblock title %} {% block stylesheet %}
+
+<style>
+    label {
+        color: #fff;
+    }
+</style>
+{% endblock stylesheet %} {% block content %}
+<div class="  align-items-center    mb-4">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Withdraw</li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="withdrawe-card">
+
+            <form action="" method="post" id="withdrawForm">
+                {% csrf_token %}
+
+                <div class="steptab">
+
+
+                    <div class="form-group mt-3">
+                        <label>Select Coin</label>
+
+                        <select id="withdraw_coin" class=" form-control" name="coin" required>
+                                         
+                                          <option value="BTC">BTC</option>
+                                          <option value="ETH">ETH</option>
+                                          <option value="DOGE">DOGE</option>
+                                          <option value="XPR">XPR</option>
+                                      </select>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label>Amount in Usd</label>
+                        <input type="number" class="form-control" placeholder="Amount" name="amount" required>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <h6 class="text-prim" id="result-amount"></h6>
+                    </div>
+                    <div class="form-group">
+                        <label>Wallet Address</label>
+                        <input type="text" class="form-control" name="wallet_address" placeholder="Wallet Address" id="withdraw_address" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <h3 class="text-prim">NOTE : <small class="text-muted">Your withdrawal  will  be approved within a period of 6-12 Hours,Make sure you provide a correct wallet address.
+                                                Your Current Balance Is : <span class="text-prim">${{ user.balance }}</span> 
+                                            </small></h3>
+                    </div>
+                    <div class="form-group mt-4">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %} {% block scripts %} {% endblock scripts %}

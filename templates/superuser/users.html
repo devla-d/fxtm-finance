@@ -1,0 +1,39 @@
+{% extends "layouts/staff-layout.html" %} {% block stylesheet %} {% endblock stylesheet %} {% block content %}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">Users</h3>
+            <p class="text-muted">Edit User</p>
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">ID</th>
+                            <th class="border-top-0">Username</th>
+                            <th class="border-top-0">Balance</th>
+                            <th class="border-top-0">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in users %}
+                        <tr>
+                            <td>{{obj.id}}</td>
+                            <td>{{obj.username}}</td>
+                            <td> ${{ obj.balance }} </td>
+                            <td><a href="/staff/user/{{obj.id}}/" class="btn-primary btn-sm">view</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %} {% block script %} {% endblock script %}

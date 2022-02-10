@@ -1,0 +1,194 @@
+{% extends "layouts/user-layout.html" %} {% load static %}{% block title %} Fund Account {% endblock title %} {% block stylesheet %}
+<style>
+    label {
+        color: #fff;
+    }
+    
+    .custom-file-uploader {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 1px solid #F2F6FE;
+        border-radius: 5px;
+        color: #AEAED5;
+    }
+    
+    .custom-file-uploader:before {
+        content: 'Upload';
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-block;
+        height: 50px;
+        background: #fd961a;
+        ;
+        color: #fff;
+        font-weight: 500;
+        z-index: 25;
+        font-size: 16px;
+        line-height: 50px;
+        padding: 0 15px;
+        text-transform: capitalize;
+        pointer-events: none;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    .custom-file-uploader:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #F2F6FE;
+        padding: 10px 15px;
+        display: block;
+        width: calc(100% - 40px);
+        pointer-events: none;
+        z-index: 20;
+        height: 48px;
+        line-height: 30px;
+        border-radius: 5px 10px 10px 5px;
+        font-weight: 500;
+        overflow: hidden;
+    }
+    
+    .custom-file-uploader input[type='file'] {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        ;
+    }
+    
+    .mytooltip {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .mytooltip .tooltiptext {
+        visibility: hidden;
+        width: 140px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -75px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .mytooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+    
+    .mytooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+</style>{% endblock stylesheet %} {% block content %}
+
+<div class="  align-items-center    mb-4">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="deposite-card">
+
+            <form action=" " method="post" id="depositForm">
+                {% csrf_token %}
+
+                <div class="steptab">
+                    <div class="form-group">
+                        <label for="basic-addon2">Wallet address</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="1Ax6UvUksdfQGRjJV1yKkv9KFVk3Mr8pyn" id="myInput" disabled>
+
+                            <div class="mytooltip input-group-append">
+                                <button style="height: 43px;" class="input-group-text btn btn-primary" onclick="copyFunction()" onmouseout="outFunc()">
+                                          <span class="tooltiptext" id="myTooltip">Copy </span>
+                                          Copy
+                                          </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>Select Coin</label>
+
+                        <select id="deposite_coin" class=" form-control" name="coin" required>
+                                         
+                                          <option value="BTC">BTC</option>
+                                          <option value="ETH">ETH</option>
+                                          <option value="DOGE">DOGE</option>
+                                          <option value="XPR">XPR</option>
+                                      </select>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label>Amount in Usd</label>
+                        <input type="number" class="form-control" placeholder="Amount" name="amount" required>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <h6 class="text-prim" id="result-amount"></h6>
+                    </div>
+
+                    <h3 class="text-prim">NOTE : <small class="text-muted">Transfer the amount worth of coin to the provided address above, you  will be credited after your transaction have been approved.</small></h3>
+                    <div class="form-group mt-4">
+                        <button class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+<!---Container Fluid-->
+
+
+
+{% endblock content %} {% block scripts %}
+<script>
+    function copyFunction() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copied";
+    }
+
+    function outFunc() {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copy to Address";
+    }
+</script>{% endblock scripts %}
